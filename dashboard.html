@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard</title>
+<style>
+/* ===== Global ===== */
+*{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,Arial,Helvetica,sans-serif;}
+body{background:#faf7f2;color:#222;line-height:1.4;}
+h2,h3,h4{font-weight:700;}
+
+/* ===== Top Navigation ===== */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  background:#0f4229;color:#fff;padding:12px 25px;border-radius:0 0 18px 18px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+.top-left{display:flex;align-items:center;gap:20px;}
+.logo{width:48px;height:48px;border-radius:50%;background:#fff;}
+.search-box input{
+  padding:8px 14px;width:260px;border:none;border-radius:20px;
+  outline:none;font-size:14px;
+}
+.top-right{display:flex;align-items:center;gap:22px;font-size:20px;cursor:pointer;}
+
+/* ===== Main Layout ===== */
+.wrapper{display:flex;gap:25px;padding:25px;max-width:1400px;margin:auto;}
+.left{flex:3;}
+.right{flex:1;display:flex;flex-direction:column;gap:25px;}
+
+/* ===== Profile Section ===== */
+.profile{
+  display:flex;align-items:center;gap:25px;margin-bottom:25px;
+}
+.profile img{
+  width:140px;height:140px;border-radius:50%;border:6px solid #0f4229;
+}
+.profile-info p{color:#666;font-size:15px;}
+.profile-info h2{font-size:30px;}
+
+/* ===== To-do Section ===== */
+.todo{
+  background:#fff;border-radius:12px;overflow:hidden;
+  box-shadow:0 2px 4px rgba(0,0,0,0.08);
+}
+.tabs{display:flex;background:#0f4229;color:#fff;font-weight:600;}
+.tabs div{
+  flex:1;text-align:center;padding:12px;cursor:pointer;
+  transition:background 0.2s;
+}
+.tabs div.active{background:#155c3b;}
+.tab-content{padding:15px;}
+.task{
+  display:flex;justify-content:space-between;padding:10px 0;
+  border-bottom:1px solid #eee;font-size:15px;
+}
+.task:last-child{border:none;}
+.task-time{color:#0f4229;font-weight:600;}
+
+/* ===== Banner ===== */
+.banner{
+  margin-top:25px;height:200px;
+  background:url("banner.png.webp") center/cover no-repeat;
+  border-radius:12px;
+  box-shadow:0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ===== Right Column Widgets ===== */
+.widget{
+  background:#fff;border-radius:12px;padding:18px;
+  box-shadow:0 2px 4px rgba(0,0,0,0.08);
+}
+.widget h3{font-size:18px;margin-bottom:10px;color:#0f4229;}
+.widget button{
+  background:#f7b400;border:none;color:#fff;font-weight:bold;
+  padding:8px 12px;border-radius:6px;cursor:pointer;
+}
+.collab-list li{list-style:none;margin-bottom:6px;font-size:15px;}
+.collab-list .online-dot{
+  display:inline-block;width:8px;height:8px;background:#4caf50;border-radius:50%;
+  margin-left:6px;
+}
+
+/* Simple Calendar grid */
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-size:12px;text-align:center;}
+.calendar div{padding:4px;}
+.calendar .today{background:#0f4229;color:#fff;border-radius:50%;}
+
+/* ===== Discover Zone ===== */
+.section-title{
+  margin:40px 25px 20px;font-size:28px;color:#0f4229;
+}
+.card-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:25px;padding:0 25px 50px;
+}
+.card{
+  background:#fff;border-radius:12px;overflow:hidden;
+  box-shadow:0 2px 4px rgba(0,0,0,0.08);
+}
+.card-header{
+  color:#fff;padding:10px 15px;font-weight:700;font-size:15px;
+}
+.card-body{padding:12px 15px;font-size:14px;color:#333;}
+.teacher{font-size:13px;color:#666;margin-top:6px;}
+
+/* Example header colors */
+.red{background:#e54b4b;}
+.blue{background:#3e8ed0;}
+.green{background:#43a047;}
+.purple{background:#7b3fa1;}
+.yellow{background:#f7b400;}
+
+@media(max-width:900px){
+  .wrapper{flex-direction:column;}
+  .right{flex-direction:row;overflow-x:auto;}
+}
+</style>
+
+<script>
+// Simple tab switcher
+function showTab(id){
+  document.querySelectorAll('.tabs div').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.style.display='none');
+  document.getElementById(id).style.display='block';
+  document.getElementById(id+'-tab').classList.add('active');
+}
+window.onload=function(){showTab('today');};
+</script>
+</head>
+
+<body>
+
+<!-- ===== Top Bar ===== -->
+<div class="topbar">
+  <div class="top-left">
+    <img src="logo.png.png" alt="Logo" class="logo">
+    <div class="search-box"><input type="text" placeholder="Search"></div>
+  </div>
+  <div class="top-right">
+    <span>🔔</span>
+    <span>💬</span>
+    <span>⚙️</span>
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <!-- ===== Left Column ===== -->
+  <div class="left">
+    <div class="profile">
+      <img src="profile.jpg.jpg" alt="Profile">
+      <div class="profile-info">
+        <p>Hi there!</p>
+        <h2>Santiago, Jake Israel Ferrancullo</h2>
+        <p>06-24XX-004XXX</p>
+      </div>
+    </div>
+
+    <div class="todo">
+      <div class="tabs">
+        <div id="today-tab" onclick="showTab('today')">Today</div>
+        <div id="later-tab" onclick="showTab('later')">Later</div>
+        <div id="next-tab" onclick="showTab('next')">Next week</div>
+        <div id="miss-tab" onclick="showTab('miss')">Missing</div>
+        <div id="done-tab" onclick="showTab('done')">Done</div>
+      </div>
+
+      <div id="today" class="tab-content">
+        <div class="task">
+          <span>ENTITY RELATIONSHIP DIAGRAM – ITE 083</span>
+          <span class="task-time">Today, 11:59 PM</span>
+        </div>
+        <div class="task">
+          <span>TITLE PROPOSAL DOCUMENTATION – ITE 083</span>
+          <span class="task-time">Today, 11:59 PM</span>
+        </div>
+      </div>
+      <div id="later" class="tab-content">No tasks later.</div>
+      <div id="next" class="tab-content">No tasks next week.</div>
+      <div id="miss" class="tab-content">No missing tasks.</div>
+      <div id="done" class="tab-content">No tasks done yet.</div>
+    </div>
+
+    <div class="banner"></div>
+  </div>
+
+  <!-- ===== Right Column ===== -->
+  <div class="right">
+    <div class="widget">
+      <h3>Campus Events</h3>
+      <p>There are no upcoming events</p>
+      <button>Go to calendar…</button>
+    </div>
+    <div class="widget">
+      <h3>Online Collaborators</h3>
+      <ul class="collab-list">
+        <li>Jake Israel Ferrancullo <span class="online-dot"></span></li>
+        <li>Ma Jholouise Llerena <span class="online-dot"></span></li>
+        <li>Other Users (1)</li>
+      </ul>
+    </div>
+    <div class="widget">
+      <h3>Academic Timeline</h3>
+      <div class="calendar">
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+        <div></div><div></div><div class="today">29</div><div>30</div><div>31</div><div>1</div><div>2</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 class="section-title">DIGITAL DISCOVER ZONE</h2>
+<div class="card-grid">
+  <div class="card">
+    <div class="card-header red">PED 032 – BSIT2-05</div>
+    <div class="card-body">
+      Due Saturday 4:00 AM – CHECK
+      <div class="teacher">Rafael Date De Torres</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header blue">ITE 298 INFO MANAGEMENT</div>
+    <div class="card-body">
+      2–5 TUESDAY
+      <div class="teacher">Yvonne Fernandez</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header green">ITE 083 – IT Project Management</div>
+    <div class="card-body">
+      Due tomorrow: TITLE PROPOSAL DOCUMENTATION, ENTITY RELATIONSHIP DIAGRAM
+      <div class="teacher">Julito B. Elias Velasco</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header purple">BSIT 2-5 SSP</div>
+    <div class="card-body">
+      IT SUCCESS PROGRAM
+      <div class="teacher">Angela Mae Sevilla</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header yellow">ITE 292 NETWORKING 1</div>
+    <div class="card-body">
+      BSIT 2-5
+      <div class="teacher">Jerick Manate Quintua</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

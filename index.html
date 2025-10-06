@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saint Jude College Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Side -->
+        <div class="login-section">
+            <img src="logo.png.png" alt="Saint Jude Logo" class="logo">
+            <h2>Saint Jude College</h2>
+            <p>Dimasalang cor. Don Quijote St., Sampaloc, Manila, 1008 Metro Manila</p>
+            
+            <!-- FORM -->
+            <form action="login.php" method="POST">
+                <input type="text" id="studentNumber" placeholder="student number" required>
+                <input type="password" id="password" placeholder="password" required>
+                
+                <div class="options">
+                    <a href="#">Forgot your password?</a>
+                    <label>
+                        <input type="checkbox" id="rememberMe"> Remember me
+                    </label>
+                </div>
+                
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <!-- Right Side -->
+        <div class="banner-section">
+            <div class="overlay"></div>
+            <img src="students.png.png" alt="Students" class="students">
+            <div class="banner-text">
+                <h3>Welcome to PHINMA Education</h3>
+            </div>
+        </div>
+    </div>
+
+<!-- Bottom Navigation -->
+<footer>
+    <div class="footer-section" style="display: flex; align-items: flex-start; gap: 20px;">
+        <!-- Logo on the left -->
+        <img src="lms logo.png.png" alt="LMS Logo" width="150">
+
+        <!-- About Us content on the right -->
+        <div>
+            <h4><b>ABOUT US</b></h4>
+            <ul style="margin: 0; padding: 0; list-style: none;">
+                <li><a href="#"><b>History</b></a></li>
+                <li><a href="#"><b>Mission</b></a></li>
+                <li><a href="#"><b>Vision</b></a></li>
+                <li><a href="#"><b>Core Values</b></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-section">
+        <h4><b>PROGRAMS</b></h4>
+        <ul>
+            <li><a href="#"><b>Senior High School</b></a></li>
+            <li><a href="#"><b>College</b></a></li>
+            <li><a href="#"><b>Graduate School</b></a></li>
+        </ul>
+    </div>
+
+    <div class="footer-section">
+        <h4><b>ALUMNI</b></h4>
+        <ul>
+            <li><a href="#"><b>Senior High School</b></a></li>
+        </ul>
+    </div>
+
+    <div class="footer-section">
+        <h4><b>SCHOLARSHIP</b></h4>
+        <ul>
+            <li><a href="#"><b>Hawak Kamay</b></a></li>
+        </ul>
+    </div>
+</footer>
+
+
+
+    <!-- SIMPLE JAVASCRIPT TO REDIRECT -->
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+            e.preventDefault(); // stop form from reloading page
+
+            // You can add validation here (example: check if not empty)
+            const studentNumber = document.getElementById("studentNumber").value;
+            const password = document.getElementById("password").value;
+
+            if (studentNumber && password) {
+                // Redirect to dashboard.html
+                window.location.href = "dashboard.html";
+            } else {
+                alert("Please fill out both fields.");
+            }
+        });
+    </script>
+</body>
+</html>
